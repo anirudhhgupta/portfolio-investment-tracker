@@ -6,139 +6,171 @@ A comprehensive portfolio management system that extracts, consolidates, and ana
 
 ```
 portfolio-tracker/
-├── 📂 src/                          # Source Code
-│   ├── extractors/                  # PDF Data Extraction
-│   │   └── portfolio_extractor.py   # Main extraction logic
-│   ├── utils/                       # Utilities & Helpers
-│   │   ├── dashboard.py             # Local HTML dashboard generator
-│   │   └── currency_converter.py    # Currency conversion utilities
-│   └── web/                         # Next.js Web Application
-│       ├── app/                     # Next.js App Router
-│       │   ├── components/          # React components
-│       │   ├── api/                 # API endpoints
-│       │   └── page.tsx             # Main dashboard page
-│       ├── package.json             # Web app dependencies
-│       └── [config files]           # Next.js configuration
-├── 📂 data/                         # Data Files
-│   ├── input/                       # Input PDF Reports (by month)
-│   │   ├── August 2025/             # Latest month folder
-│   │   └── April 2025/              # Previous months
-│   └── output/                      # Generated Data Files
-│       ├── extracted_portfolio_data.json
-│       ├── dashboard.html           # Local HTML dashboard
-│       └── exchange_rates_cache.json
-├── 📂 scripts/                      # Automation Scripts
-│   ├── extract_portfolio.py        # Run portfolio extraction
-│   ├── generate_dashboard.py       # Generate local dashboard
-│   └── run_web_app.sh              # Start web application
-├── 📂 docs/                         # Documentation
-│   ├── DEPLOYMENT_GUIDE.md         # Vercel deployment guide
-│   └── EXECUTION_GUIDE.md          # Usage instructions
-├── 📂 config/                       # Configuration Files
-│   └── vercel.json                 # Vercel deployment config
-└── current-assets.txt              # Working notes
+├── src/                     # Source code
+│   ├── extractors/         # PDF extraction logic
+│   ├── utils/              # Utilities (dashboard, currency)
+│   └── web/                # Next.js application
+├── scripts/                # Execution scripts
+├── data/                   # Data directory
+│   ├── input/             # PDF files by month
+│   └── output/            # Generated files
+├── config/                # Configuration files
+└── docs/                  # Documentation
 ```
 
 ## 🚀 Quick Start
 
-### 1. Extract Portfolio Data
+### 1. Setup Environment
 ```bash
-# From project root
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Install Node.js dependencies  
+cd src/web && npm install
+```
+
+### 2. Add Portfolio Data
+```bash
+# Place PDF files in monthly folders
+data/input/[Month YYYY]/your-portfolio-files.pdf
+```
+
+### 3. Run Portfolio Analysis
+```bash
+# Extract data from PDFs
 python3 scripts/extract_portfolio.py
-```
 
-### 2. Generate Local HTML Dashboard
-```bash
+# Generate local HTML dashboard  
 python3 scripts/generate_dashboard.py
-# Opens: data/output/dashboard.html
-```
 
-### 3. Start Web Application
-```bash
-# Method 1: Using script
-./scripts/run_web_app.sh
-
-# Method 2: Direct command
-cd src/web && npm run dev
-# Opens: http://localhost:3000
+# Start web application
+python3 scripts/run_web_app.sh
 ```
 
 ## 📊 Features
 
-### 🔍 **Data Extraction**
-- **Automatic PDF Processing**: Extracts from 6 wealth managers
-- **Smart Deduplication**: Removes duplicate holdings across managers
-- **Investment Date Detection**: Parses complex date formats
-- **Currency Conversion**: USD to INR for US stocks
-- **Latest Month Auto-Detection**: Automatically uses newest data folder
+### 📈 **Multi-Manager Support**
+- **Client Associates**: AIF, PMS, Mutual Funds
+- **IIFL 360 One**: Premium investment products  
+- **Kotak Securities**: Equity and debt holdings
+- **Motilal Oswal**: Investment advisory portfolios
+- **INDmoney**: Consolidated investment tracking
+- **Yes Securities**: Trading and investment accounts
 
-### 🌐 **Web Dashboard** 
-- **Interactive React Interface**: Modern, responsive design
-- **Real-time Filtering**: Search, filter by manager/asset type
-- **Advanced Sorting**: Multiple sort options
-- **Visual Analytics**: Charts for asset allocation & manager performance
-- **Complete Data View**: IRR, USD values, full asset names
+### 💰 **Advanced Analytics**
+- **P&L Analysis**: Absolute and percentage returns
+- **XIRR Calculations**: Time-weighted returns 
+- **Currency Conversion**: USD to INR with live rates
+- **Asset Allocation**: Visual breakdown by type and manager
+- **Performance Metrics**: Comprehensive portfolio insights
 
-### 🖥️ **Local Tools**
-- **HTML Dashboard**: Static dashboard with Chart.js visualizations
-- **Currency Utilities**: Exchange rate caching and conversion
-- **Command Line Interface**: Easy-to-use scripts
+### 🖥️ **Dual Interface**
+- **Local Dashboard**: Static HTML with full functionality
+- **Web Application**: Next.js with modern React components
+- **Responsive Design**: Mobile and desktop optimized
+- **Real-time Filtering**: Search, sort, and filter holdings
 
-## 📈 Portfolio Summary
+### 🔧 **Technical Stack**
+- **Backend**: Python 3.8+ with pdfplumber for extraction
+- **Frontend**: Next.js 14, TypeScript, Tailwind CSS
+- **Data Processing**: Pandas, NumPy for calculations  
+- **Deployment**: Vercel-ready with static generation
+- **Security**: Local processing, no sensitive data transmission
 
-- **Total Value**: ₹45.87+ Crores
-- **Holdings**: 50+ assets across 6 managers
-- **Return**: +43% overall performance
-- **Managers**: IND Money, Client Associates, Kotak, Motilal Oswal, Yes Bank, IIFL 360 One
+## 📁 Data Structure
 
-## 🔧 Technical Stack
-
-- **Backend**: Python 3.9+ (pandas, pdfplumber, requests)
-- **Frontend**: Next.js 14, React 18, TypeScript
-- **Styling**: Tailwind CSS
-- **Charts**: Recharts (web), Chart.js (local)
-- **Deployment**: Vercel (web), Local HTML (desktop)
-
-## 📋 Monthly Workflow
-
-1. **Add New Data**: Place PDF reports in `data/input/[Month Year]/`
-2. **Extract Data**: Run `python3 scripts/extract_portfolio.py`
-3. **View Locally**: Run `python3 scripts/generate_dashboard.py`
-4. **Update Web**: The web app automatically uses the latest data
-5. **Deploy**: Commit changes to auto-deploy to Vercel
-
-## 🛠️ Development
-
-### Local Development
-```bash
-# Install web dependencies
-cd src/web && npm install
-
-# Start development server
-npm run dev
+### Input Structure
+```
+data/input/
+└── August 2025/                    # Monthly folders
+    ├── Client Associates - Portfolio Aug'25.pdf
+    ├── IIFL 360 One - Report.pdf
+    ├── Kotak - Holdings.pdf  
+    ├── Motilal Oswal - Portfolio.pdf
+    ├── IND Money - Holdings.xls
+    └── Yes Bank - Monthly.pdf
 ```
 
-### Adding New Extractors
-1. Add extraction logic to `src/extractors/portfolio_extractor.py`
-2. Update the main extraction function
-3. Test with sample PDFs
+### Output Structure  
+```
+data/output/
+├── extracted_portfolio_data.json    # Consolidated data
+├── dashboard.html                   # Local HTML dashboard
+└── exchange_rates_cache.json       # Currency cache
+```
 
-### Customizing the Dashboard
-- **Web UI**: Edit components in `src/web/app/components/`
-- **Local HTML**: Modify `src/utils/dashboard.py`
-- **Styling**: Update Tailwind classes or CSS
+## 🔍 Supported File Formats
 
-## 📚 Documentation
+| Manager | Format | Key Data Extracted |
+|---------|--------|-------------------|
+| Client Associates | PDF | Holdings, P&L, XIRR, Investment dates |
+| IIFL 360 One | PDF | Market values, P&L, Asset allocation |  
+| Kotak Securities | PDF | Current values, P&L percentages |
+| Motilal Oswal | PDF | Portfolio holdings, Performance metrics |
+| INDmoney | XLS | Consolidated holdings, Returns |
+| Yes Securities | PDF | Trading accounts, Investment summary |
 
-- **[Deployment Guide](docs/DEPLOYMENT_GUIDE.md)**: Complete Vercel deployment instructions
-- **[Execution Guide](docs/EXECUTION_GUIDE.md)**: Detailed usage and troubleshooting
+## 🎯 Key Metrics Tracked
 
-## 🔒 Security
+- **Current Investment Value**: Total deployed capital
+- **Current Market Value**: Present portfolio worth
+- **P&L Amount**: Absolute gains/losses  
+- **P&L Percentage**: Return percentages
+- **XIRR**: Annualized internal rate of return
+- **Asset Allocation**: Breakdown by equity/debt/alternatives
+- **Manager Performance**: Comparative analysis
 
-- ✅ PDF files excluded from git (`.gitignore`)
-- ✅ No sensitive data in repository
-- ✅ Local-first data processing
-- ✅ HTTPS deployment on Vercel
+## 🛠️ Configuration
+
+### Environment Variables
+```bash
+# Currency conversion API (optional)
+EXCHANGE_RATE_API_KEY=your-api-key
+
+# Deployment settings
+VERCEL_PROJECT_ID=your-project-id  
+```
+
+### Customization
+- **Data Extraction**: Modify `src/extractors/portfolio_extractor.py`
+- **UI Components**: Edit React components in `src/web/app/components/`
+- **Styling**: Update Tailwind classes and `globals.css`
+- **Analytics**: Enhance calculations in utility functions
+
+## 📊 Usage Examples
+
+### Extract Latest Portfolio Data
+```bash
+python3 scripts/extract_portfolio.py
+# Output: 45 holdings extracted, ₹31.98Cr → ₹45.72Cr (+42.97%)
+```
+
+### Generate Dashboard  
+```bash
+python3 scripts/generate_dashboard.py
+# Output: dashboard.html with interactive charts
+```
+
+### Start Web Application
+```bash
+cd src/web && npm run dev
+# Available at: http://localhost:3000
+```
+
+### Deploy to Vercel
+```bash
+vercel --prod
+# Deployed URL: https://your-portfolio.vercel.app
+```
+
+## 🔐 Security Features
+
+- ✅ **Local Processing**: All extraction happens locally
+- ✅ **No Cloud Storage**: Sensitive data never leaves your machine  
+- ✅ **PDF files excluded from git (`.gitignore`)**
+- ✅ **No sensitive data in repository**
+- ✅ **Local-first data processing**
+- ✅ **HTTPS deployment on Vercel**
 
 ---
 
