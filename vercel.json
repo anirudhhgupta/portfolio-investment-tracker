@@ -1,7 +1,8 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
+  "buildCommand": "cd src/web && npm install && npm run build",
+  "outputDirectory": "src/web/.next",
   "framework": "nextjs",
+  "rootDirectory": "src/web",
   "functions": {
     "app/api/portfolio/route.ts": {
       "maxDuration": 30
