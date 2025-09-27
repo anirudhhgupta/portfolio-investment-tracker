@@ -1,0 +1,17 @@
+{
+  "USD_INR": {
+    "rate": 83.25,
+    "timestamp": "2025-09-27T10:00:00",
+    "source": "fallback"
+  },
+  "EUR_INR": {
+    "rate": 90.50,
+    "timestamp": "2025-09-27T10:00:00", 
+    "source": "fallback"
+  },
+  "GBP_INR": {
+    "rate": 105.75,
+    "timestamp": "2025-09-27T10:00:00",
+    "source": "fallback"
+  }
+}
