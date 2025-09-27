@@ -1,6 +1,4 @@
 {
-  "buildCommand": "cd src/web && npm install && npm run build",
-  "outputDirectory": "src/web/.next",
   "framework": "nextjs",
   "rootDirectory": "src/web",
   "functions": {
