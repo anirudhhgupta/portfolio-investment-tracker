@@ -5,7 +5,10 @@ import fs from 'fs'
 export async function GET() {
   try {
     // Read the extracted portfolio data
+    console.log('API: CWD:', process.cwd())
     const dataPath = path.join(process.cwd(), '..', '..', 'data', 'output', 'extracted_portfolio_data.json')
+    console.log('API: Data path:', dataPath)
+    console.log('API: File exists:', fs.existsSync(dataPath))
     
     if (!fs.existsSync(dataPath)) {
       return NextResponse.json(
